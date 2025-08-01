@@ -1,18 +1,6 @@
 💹 Trading Platform Simulator
     A real-time trading simulation dashboard built using Next.js. This project emulates order placement in a live order book environment, supporting venues like OKX, Bybit, and Deribit.
 
-✅ Features
-    🧮 Simulate Market & Limit Orders
-
-    📉 Slippage & Market Impact Calculations
-
-    📊 Live Orderbook & Depth Visualizations
-
-    🔄 Multi-Timing Scenarios (Immediate, 5s, 10s, 30s)
-
-    💰 Live P/L Estimation
-
-    🌍 Supports Multiple Venues (OKX, Bybit, Deribit)
 
 🚀 Getting Started
     First, install dependencies:
@@ -26,6 +14,20 @@ Run the development server:
 
 🌐 Live Demo
     🔗 https://trading-platform-rho.vercel.app
+
+
+✅ Features
+    🧮 Simulate Market & Limit Orders
+
+    📉 Slippage & Market Impact Calculations
+
+    📊 Live Orderbook & Depth Visualizations
+
+    🔄 Multi-Timing Scenarios (Immediate, 5s, 10s, 30s)
+
+    💰 Live P/L Estimation
+
+    🌍 Supports Multiple Venues (OKX, Bybit, Deribit)
 
 📦 Libraries Used
     Library	Purpose
