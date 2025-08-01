@@ -14,6 +14,14 @@ import {
 import { connectToOKX, disconnectFromOKX } from '@/lib/orderbook/okxService';
 import { useEffect, useState } from 'react';
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
 import OrderbookViewer from '@/components/OrderbookViewer';
 import { useOrderbookStore } from '@/store/orderbookStore';
 
@@ -52,27 +60,23 @@ export default function DashboardPage() {
         {/* Header */}
         <header className="flex items-center justify-between mb-4">
           <h1 className="text-2xl font-bold"> Trading Dashboard</h1>
-          <div>
-            <label className="mr-2 font-semibold">Venue:</label>
-            <select
-              value={venue}
-              onChange={(e) =>
-                setVenue(e.target.value as 'OKX' | 'Bybit' | 'Deribit')
-              }
-              className="bg-gray-800 border border-gray-700 text-white px-3 py-2 rounded"
-            >
-              <option value="OKX">OKX</option>
-              <option value="Bybit">Bybit</option>
-              <option value="Deribit">Deribit</option>
-            </select>
-          </div>
+        <Select value={venue} onValueChange={(value) => setVenue(value as 'OKX' | 'Bybit' | 'Deribit')}>
+  <SelectTrigger className="w-[180px]">
+    <SelectValue placeholder="Select venue" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="OKX">OKX</SelectItem>
+    <SelectItem value="Bybit">Bybit</SelectItem>
+    <SelectItem value="Deribit">Deribit</SelectItem>
+  </SelectContent>
+</Select>
         </header>
 
         {/* 3-Column Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-[1.3fr_2.5fr_2fr] gap-4">
           {/* Left Column - Simulation */}
           <section className="bg-gray-800 rounded-lg p-4 shadow">
-            <h2 className="text-xl font-semibold text-indigo-400 mb-4">
+            <h2 className="text-xl font-semibold  mb-4">
                Simulate Order Placement
             </h2>
             <SimulationForm onSubmitSim={handleSubmit} />
@@ -80,7 +84,7 @@ export default function DashboardPage() {
 
           {/* Middle Column - Live Orderbook */}
           <section className="bg-gray-800 rounded-lg p-4 shadow max-h-[85vh] overflow-y-auto">
-            <h2 className="text-xl font-semibold text-green-400 mb-4">
+            <h2 className="text-xl font-semibold  mb-4">
                Orderbook ({symbol})
             </h2>
             {/* <div className="grid grid-cols-2 gap-4 text-sm">
@@ -165,7 +169,7 @@ export default function DashboardPage() {
 
           {/* Right Column - Simulation Output */}
           <section className="bg-gray-800 rounded-lg p-4 shadow overflow-y-auto max-h-[85vh]">
-            <h2 className="text-xl font-semibold text-yellow-400 mb-4">
+            <h2 className="text-xl font-semibold  mb-4">
                Market Depth & Simulation Details
             </h2>
             {simulatedOrder ? (

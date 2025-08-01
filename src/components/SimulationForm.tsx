@@ -169,9 +169,9 @@ export default function SimulationForm({
         <p className="text-xs text-red-500">{errors.delay?.message}</p>
       </div>
 
-      <Button type="submit" className="w-full mt-4">
-        Simulate Order
-      </Button>
+     <Button variant="default" className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white">
+  Simulate Order
+</Button>
     </form>
   );
 }
