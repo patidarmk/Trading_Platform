@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+💹 Trading Platform Simulator
+A real-time trading simulation dashboard built using Next.js. This project emulates order placement in a live order book environment, supporting venues like OKX, Bybit, and Deribit.
 
-## Getting Started
+✅ Features
+🧮 Simulate Market & Limit Orders
 
-First, run the development server:
+📉 Slippage & Market Impact Calculations
 
-```bash
+📊 Live Orderbook & Depth Visualizations
+
+🔄 Multi-Timing Scenarios (Immediate, 5s, 10s, 30s)
+
+💰 Live P/L Estimation
+
+🌍 Supports Multiple Venues (OKX, Bybit, Deribit)
+
+🚀 Getting Started
+First, install dependencies:
+
+bash
+Copy
+Edit
+npm install
+Then, run the development server:
+
+bash
+Copy
+Edit
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open http://localhost:3000 in your browser to view the app.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🌐 Live Demo
+🔗 https://trading-platform-rho.vercel.app
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+📦 Libraries Used
+Library	Purpose
+Next.js	React-based web application framework
+React	UI development library
+Tailwind CSS	Utility-first CSS framework for styling
+shadcn/ui	Accessible and unstyled UI primitives
+Zustand	Lightweight state management library
+clsx	Utility for conditionally joining class names
+lucide-react	Icon library used throughout the UI
+framer-motion	For smooth transitions and animations (optional)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+📄 Assumptions
+Orderbook data is either simulated or fetched from mock APIs.
 
-## Learn More
+Market price reference is based on the best bid/ask available at the time of simulation.
 
-To learn more about Next.js, take a look at the following resources:
+Simulation scenarios like “5s delay” assume a static snapshot of the orderbook at that time.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Orders are filled based on price-time priority (top-down).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This tool is designed for simulation/demo purposes only, not actual trading.
 
-## Deploy on Vercel
+🗂️ Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+/app          → Next.js app directory (routing, pages)
+/components   → Reusable UI components
+/store        → Zustand stores for global state
+/lib          → Utility functions and simulation logic
+/types        → Type definitions (order, venue, etc.)
+📄 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
