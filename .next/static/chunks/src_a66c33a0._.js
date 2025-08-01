@@ -2161,481 +2161,6 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 
 var { k: __turbopack_refresh__, m: module } = __turbopack_context__;
 {
-// // // // 'use client';
-// // // // import SimulationForm, {
-// // // //   SimulationFormValues,
-// // // // } from '@/components/SimulationForm';
-// // // // import {
-// // // //   connectToBybit,
-// // // //   disconnectFromBybit,
-// // // // } from '@/lib/orderbook/bybitService';
-// // // // import {
-// // // //   connectToDeribit,
-// // // //   disconnectFromDeribit,
-// // // // } from '@/lib/orderbook/deribitService';
-// // // // import { connectToOKX, disconnectFromOKX } from '@/lib/orderbook/okxService';
-// // // // import { useEffect, useState } from 'react';
-// // // // import OrderbookViewer from '@/components/OrderbookViewer';
-// // // // import { useOrderbookStore } from '@/store/orderbookStore';
-// // // // const symbols = {
-// // // //   OKX: 'BTC-USDT',
-// // // //   Bybit: 'BTCUSDT',
-// // // //   Deribit: 'BTC-PERPETUAL',
-// // // // } as const;
-// // // // export default function Home() {
-// // // //   const [venue, setVenue] = useState<'OKX' | 'Bybit' | 'Deribit'>('OKX');
-// // // //   const [simulatedOrder, setSimulatedOrder] = useState<SimulationFormValues>();
-// // // //   const symbol = symbols[venue];
-// // // //   const orderbook = useOrderbookStore((s) => s.data[venue]?.[symbol]);
-// // // //   useEffect(() => {
-// // // //     if (venue === 'OKX') connectToOKX(symbol);
-// // // //     if (venue === 'Bybit') connectToBybit(symbol);
-// // // //     if (venue === 'Deribit') connectToDeribit(symbol);
-// // // //     return () => {
-// // // //       if (venue === 'OKX') disconnectFromOKX(symbol);
-// // // //       if (venue === 'Bybit') disconnectFromBybit(symbol);
-// // // //       if (venue === 'Deribit') disconnectFromDeribit(symbol);
-// // // //     };
-// // // //   }, [venue, symbol]);
-// // // //   const handleSubmit = (data: SimulationFormValues) => {
-// // // //     setVenue(data.venue);
-// // // //     setSimulatedOrder(data);
-// // // //   };
-// // // //   return (
-// // // //     <main className="bg-gray-900 min-h-screen text-white p-6">
-// // // //       <div className="max-w-7xl mx-auto space-y-6">
-// // // //         <header className="flex flex-col md:flex-row md:items-center justify-between">
-// // // //           <h1 className="text-2xl font-bold">
-// // // //             📊 Real-Time Orderbook Simulator
-// // // //           </h1>
-// // // //           <div className="mt-4 md:mt-0">
-// // // //             <label className="mr-2 font-semibold">Venue:</label>
-// // // //             <select
-// // // //               value={venue}
-// // // //               onChange={(e) =>
-// // // //                 setVenue(e.target.value as 'OKX' | 'Bybit' | 'Deribit')
-// // // //               }
-// // // //               className="bg-gray-800 border border-gray-700 text-white px-3 py-2 rounded"
-// // // //             >
-// // // //               <option value="OKX">OKX</option>
-// // // //               <option value="Bybit">Bybit</option>
-// // // //               <option value="Deribit">Deribit</option>
-// // // //             </select>
-// // // //           </div>
-// // // //         </header>
-// // // //         <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-// // // //           {/* Raw Bids and Asks View */}
-// // // //           <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-// // // //             <h2 className="text-lg font-semibold text-green-400 mb-2">
-// // // //               📘 Bids ({symbol})
-// // // //             </h2>
-// // // //             <div className="text-sm max-h-96 overflow-y-auto space-y-1">
-// // // //               {orderbook?.bids?.slice(0, 15).map((b, i) => (
-// // // //                 <div key={i} className="text-green-300">
-// // // //                   {b.price.toFixed(2)} × {b.quantity}
-// // // //                 </div>
-// // // //               ))}
-// // // //             </div>
-// // // //           </div>
-// // // //           <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-// // // //             <h2 className="text-lg font-semibold text-red-400 mb-2">
-// // // //               📕 Asks ({symbol})
-// // // //             </h2>
-// // // //             <div className="text-sm max-h-96 overflow-y-auto space-y-1">
-// // // //               {orderbook?.asks?.slice(0, 15).map((a, i) => (
-// // // //                 <div key={i} className="text-red-300">
-// // // //                   {a.price.toFixed(2)} × {a.quantity}
-// // // //                 </div>
-// // // //               ))}
-// // // //             </div>
-// // // //           </div>
-// // // //         </section>
-// // // //         {/* Simulation Form */}
-// // // //         <section className="bg-gray-800 p-6 rounded-lg shadow-md">
-// // // //           <h2 className="text-xl font-semibold mb-4 text-indigo-400">
-// // // //             🧪 Simulate Order Placement
-// // // //           </h2>
-// // // //           <SimulationForm onSubmitSim={handleSubmit} />
-// // // //         </section>
-// // // //         {/* Visual Simulation Viewer */}
-// // // //         {simulatedOrder && (
-// // // //           <section className="bg-gray-800 p-6 rounded-lg shadow-md">
-// // // //             <h2 className="text-xl font-semibold mb-4 text-yellow-400">
-// // // //               📍 Simulation Visualization
-// // // //             </h2>
-// // // //             <OrderbookViewer
-// // // //               venue={simulatedOrder.venue}
-// // // //               symbol={simulatedOrder.symbol}
-// // // //               simulatedOrder={simulatedOrder}
-// // // //             />
-// // // //           </section>
-// // // //         )}
-// // // //       </div>
-// // // //     </main>
-// // // //   );
-// // // // }
-// // // 'use client';
-// // // import SimulationForm, {
-// // //   SimulationFormValues,
-// // // } from '@/components/SimulationForm';
-// // // import {
-// // //   connectToBybit,
-// // //   disconnectFromBybit,
-// // // } from '@/lib/orderbook/bybitService';
-// // // import {
-// // //   connectToDeribit,
-// // //   disconnectFromDeribit,
-// // // } from '@/lib/orderbook/deribitService';
-// // // import { connectToOKX, disconnectFromOKX } from '@/lib/orderbook/okxService';
-// // // import { useEffect, useState } from 'react';
-// // // import OrderbookViewer from '@/components/OrderbookViewer';
-// // // import { useOrderbookStore } from '@/store/orderbookStore';
-// // // const symbols = {
-// // //   OKX: 'BTC-USDT',
-// // //   Bybit: 'BTCUSDT',
-// // //   Deribit: 'BTC-PERPETUAL',
-// // // } as const;
-// // // export default function Home() {
-// // //   const [venue, setVenue] = useState<'OKX' | 'Bybit' | 'Deribit'>('OKX');
-// // //   const [simulatedOrder, setSimulatedOrder] = useState<SimulationFormValues>();
-// // //   const symbol = symbols[venue];
-// // //   const orderbook = useOrderbookStore((s) => s.data[venue]?.[symbol]);
-// // //   useEffect(() => {
-// // //     if (venue === 'OKX') connectToOKX(symbol);
-// // //     if (venue === 'Bybit') connectToBybit(symbol);
-// // //     if (venue === 'Deribit') connectToDeribit(symbol);
-// // //     return () => {
-// // //       if (venue === 'OKX') disconnectFromOKX(symbol);
-// // //       if (venue === 'Bybit') disconnectFromBybit(symbol);
-// // //       if (venue === 'Deribit') disconnectFromDeribit(symbol);
-// // //     };
-// // //   }, [venue, symbol]);
-// // //   const handleSubmit = (data: SimulationFormValues) => {
-// // //     setVenue(data.venue);
-// // //     setSimulatedOrder(data);
-// // //   };
-// // //   return (
-// // //     <main className="bg-gray-950 min-h-screen text-white px-4 md:px-6 py-8">
-// // //       <div className="max-w-7xl mx-auto space-y-10">
-// // //         {/* Header */}
-// // //         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-// // //           <h1 className="text-3xl font-bold text-white">
-// // //             📊 Real-Time Orderbook Simulator
-// // //           </h1>
-// // //           <div className="flex items-center gap-3">
-// // //             <label className="text-sm font-medium text-gray-300">Venue:</label>
-// // //             <select
-// // //               value={venue}
-// // //               onChange={(e) =>
-// // //                 setVenue(e.target.value as 'OKX' | 'Bybit' | 'Deribit')
-// // //               }
-// // //               className="bg-gray-800 border border-gray-700 text-white px-3 py-2 rounded-md text-sm"
-// // //             >
-// // //               <option value="OKX">OKX</option>
-// // //               <option value="Bybit">Bybit</option>
-// // //               <option value="Deribit">Deribit</option>
-// // //             </select>
-// // //           </div>
-// // //         </div>
-// // //         {/* Orderbook Bids and Asks */}
-// // //         <section className="grid md:grid-cols-2 gap-6">
-// // //           <div className="bg-gray-900 p-5 rounded-xl shadow-md border border-gray-800">
-// // //             <h2 className="text-lg font-semibold text-green-400 mb-4">
-// // //               📘 Top 15 Bids — {symbol}
-// // //             </h2>
-// // //             <div className="max-h-96 overflow-y-auto space-y-1 text-sm">
-// // //               {orderbook?.bids?.slice(0, 15).map((b, i) => (
-// // //                 <div key={i} className="text-green-300">
-// // //                   {b.price.toFixed(2)} × {b.quantity}
-// // //                 </div>
-// // //               ))}
-// // //             </div>
-// // //           </div>
-// // //           <div className="bg-gray-900 p-5 rounded-xl shadow-md border border-gray-800">
-// // //             <h2 className="text-lg font-semibold text-red-400 mb-4">
-// // //               📕 Top 15 Asks — {symbol}
-// // //             </h2>
-// // //             <div className="max-h-96 overflow-y-auto space-y-1 text-sm">
-// // //               {orderbook?.asks?.slice(0, 15).map((a, i) => (
-// // //                 <div key={i} className="text-red-300">
-// // //                   {a.price.toFixed(2)} × {a.quantity}
-// // //                 </div>
-// // //               ))}
-// // //             </div>
-// // //           </div>
-// // //         </section>
-// // //         {/* Simulation Form */}
-// // //         <section className="bg-gray-900 p-6 rounded-xl shadow border border-gray-800">
-// // //           <h2 className="text-xl font-semibold mb-4 text-indigo-400">
-// // //             🧪 Simulate Order Placement
-// // //           </h2>
-// // //           <SimulationForm onSubmitSim={handleSubmit} />
-// // //         </section>
-// // //         {/* Simulation Result */}
-// // //         {simulatedOrder && (
-// // //           <section className="bg-gray-900 p-6 rounded-xl shadow border border-gray-800">
-// // //             <h2 className="text-xl font-semibold mb-4 text-yellow-400">
-// // //               📍 Simulation Visualization
-// // //             </h2>
-// // //             <OrderbookViewer
-// // //               venue={simulatedOrder.venue}
-// // //               symbol={simulatedOrder.symbol}
-// // //               simulatedOrder={simulatedOrder}
-// // //             />
-// // //           </section>
-// // //         )}
-// // //       </div>
-// // //     </main>
-// // //   );
-// // // }
-// // 'use client';
-// // import SimulationForm, {
-// //   SimulationFormValues,
-// // } from '@/components/SimulationForm';
-// // import {
-// //   connectToBybit,
-// //   disconnectFromBybit,
-// // } from '@/lib/orderbook/bybitService';
-// // import {
-// //   connectToDeribit,
-// //   disconnectFromDeribit,
-// // } from '@/lib/orderbook/deribitService';
-// // import { connectToOKX, disconnectFromOKX } from '@/lib/orderbook/okxService';
-// // import { useEffect, useState } from 'react';
-// // import OrderbookViewer from '@/components/OrderbookViewer';
-// // import { useOrderbookStore } from '@/store/orderbookStore';
-// // const symbols = {
-// //   OKX: 'BTC-USDT',
-// //   Bybit: 'BTCUSDT',
-// //   Deribit: 'BTC-PERPETUAL',
-// // } as const;
-// // export default function Home() {
-// //   const [venue, setVenue] = useState<'OKX' | 'Bybit' | 'Deribit'>('OKX');
-// //   const [simulatedOrder, setSimulatedOrder] = useState<SimulationFormValues>();
-// //   const symbol = symbols[venue];
-// //   const orderbook = useOrderbookStore((s) => s.data[venue]?.[symbol]);
-// //   useEffect(() => {
-// //     if (venue === 'OKX') connectToOKX(symbol);
-// //     if (venue === 'Bybit') connectToBybit(symbol);
-// //     if (venue === 'Deribit') connectToDeribit(symbol);
-// //     return () => {
-// //       if (venue === 'OKX') disconnectFromOKX(symbol);
-// //       if (venue === 'Bybit') disconnectFromBybit(symbol);
-// //       if (venue === 'Deribit') disconnectFromDeribit(symbol);
-// //     };
-// //   }, [venue, symbol]);
-// //   const handleSubmit = (data: SimulationFormValues) => {
-// //     setVenue(data.venue);
-// //     setSimulatedOrder(data);
-// //   };
-// //   return (
-// //     <main className="bg-gray-950 min-h-screen text-white px-6 py-10">
-// //       <div className="max-w-7xl mx-auto space-y-10">
-// //         <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-// //           <h1 className="text-3xl font-bold text-white">
-// //             📊 Real-Time Orderbook Simulator
-// //           </h1>
-// //           <div className="flex items-center gap-2">
-// //             <label className="text-sm font-semibold text-gray-300">
-// //               Select Venue:
-// //             </label>
-// //             <select
-// //               value={venue}
-// //               onChange={(e) =>
-// //                 setVenue(e.target.value as 'OKX' | 'Bybit' | 'Deribit')
-// //               }
-// //               className="bg-gray-800 border border-gray-700 text-white px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-// //             >
-// //               <option value="OKX">OKX</option>
-// //               <option value="Bybit">Bybit</option>
-// //               <option value="Deribit">Deribit</option>
-// //             </select>
-// //           </div>
-// //         </header>
-// //         {/* Orderbook Panel */}
-// //         <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-// //           <div className="bg-gray-900 rounded-xl p-5 shadow-lg border border-gray-800">
-// //             <h2 className="text-lg font-semibold text-green-400 mb-3">
-// //               📘 Bids ({symbol})
-// //             </h2>
-// //             <div className="text-sm max-h-96 overflow-y-auto divide-y divide-gray-800">
-// //               {orderbook?.bids?.slice(0, 20).map((b, i) => (
-// //                 <div key={i} className="text-green-300 py-1">
-// //                   {b.price.toFixed(2)} × {b.quantity}
-// //                 </div>
-// //               ))}
-// //             </div>
-// //           </div>
-// //           <div className="bg-gray-900 rounded-xl p-5 shadow-lg border border-gray-800">
-// //             <h2 className="text-lg font-semibold text-red-400 mb-3">
-// //               📕 Asks ({symbol})
-// //             </h2>
-// //             <div className="text-sm max-h-96 overflow-y-auto divide-y divide-gray-800">
-// //               {orderbook?.asks?.slice(0, 20).map((a, i) => (
-// //                 <div key={i} className="text-red-300 py-1">
-// //                   {a.price.toFixed(2)} × {a.quantity}
-// //                 </div>
-// //               ))}
-// //             </div>
-// //           </div>
-// //         </section>
-// //         {/* Simulation Form */}
-// //         <section className="bg-gray-900 border border-gray-800 p-6 rounded-xl shadow-lg">
-// //           <h2 className="text-xl font-semibold text-indigo-400 mb-4">
-// //             🧪 Simulate Order Placement
-// //           </h2>
-// //           <SimulationForm onSubmitSim={handleSubmit} />
-// //         </section>
-// //         {/* Simulation Output */}
-// //         {simulatedOrder && (
-// //           <section className="bg-gray-900 border border-gray-800 p-6 rounded-xl shadow-lg">
-// //             <h2 className="text-xl font-semibold text-yellow-400 mb-4">
-// //               📍 Simulation Visualization
-// //             </h2>
-// //             <OrderbookViewer
-// //               venue={simulatedOrder.venue}
-// //               symbol={simulatedOrder.symbol}
-// //               simulatedOrder={simulatedOrder}
-// //             />
-// //           </section>
-// //         )}
-// //       </div>
-// //     </main>
-// //   );
-// // }
-// 'use client';
-// import SimulationForm, {
-//   SimulationFormValues,
-// } from '@/components/SimulationForm';
-// import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-// import {
-//   connectToBybit,
-//   disconnectFromBybit,
-// } from '@/lib/orderbook/bybitService';
-// import {
-//   connectToDeribit,
-//   disconnectFromDeribit,
-// } from '@/lib/orderbook/deribitService';
-// import { connectToOKX, disconnectFromOKX } from '@/lib/orderbook/okxService';
-// import { useEffect, useState } from 'react';
-// import OrderbookViewer from '@/components/OrderbookViewer';
-// import { useOrderbookStore } from '@/store/orderbookStore';
-// const symbols = {
-//   OKX: 'BTC-USDT',
-//   Bybit: 'BTCUSDT',
-//   Deribit: 'BTC-PERPETUAL',
-// } as const;
-// export default function DashboardPage() {
-//   const [venue, setVenue] = useState<'OKX' | 'Bybit' | 'Deribit'>('OKX');
-//   const [simulatedOrder, setSimulatedOrder] = useState<SimulationFormValues>();
-//   const symbol = symbols[venue];
-//   const orderbook = useOrderbookStore((s) => s.data[venue]?.[symbol]);
-//   useEffect(() => {
-//     if (venue === 'OKX') connectToOKX(symbol);
-//     if (venue === 'Bybit') connectToBybit(symbol);
-//     if (venue === 'Deribit') connectToDeribit(symbol);
-//     return () => {
-//       if (venue === 'OKX') disconnectFromOKX(symbol);
-//       if (venue === 'Bybit') disconnectFromBybit(symbol);
-//       if (venue === 'Deribit') disconnectFromDeribit(symbol);
-//     };
-//   }, [venue, symbol]);
-//   const handleSubmit = (data: SimulationFormValues) => {
-//     setVenue(data.venue);
-//     setSimulatedOrder(data);
-//   };
-//   return (
-//     <main className="bg-gray-900 min-h-screen text-white p-6">
-//       <div className="max-w-7xl mx-auto space-y-6">
-//         {/* Header */}
-//         <header className="flex items-center justify-between">
-//           <h1 className="text-2xl font-bold">📊 Trading Dashboard</h1>
-//           <div>
-//             <label className="mr-2 font-semibold">Venue:</label>
-//             <select
-//               value={venue}
-//               onChange={(e) =>
-//                 setVenue(e.target.value as 'OKX' | 'Bybit' | 'Deribit')
-//               }
-//               className="bg-gray-800 border border-gray-700 text-white px-3 py-2 rounded"
-//             >
-//               <option value="OKX">OKX</option>
-//               <option value="Bybit">Bybit</option>
-//               <option value="Deribit">Deribit</option>
-//             </select>
-//           </div>
-//         </header>
-//         {/* Dashboard Tabs */}
-//         <div className="flex gap-4">
-//           {/* Left Tabs Navigation */}
-//           <Tabs defaultValue="simulation" className="flex w-full">
-//             <TabsList className="flex flex-col bg-gray-800 rounded-md p-2 min-w-[180px]">
-//               <TabsTrigger value="simulation" className="mb-2">
-//                 🧪 Simulate Order
-//               </TabsTrigger>
-//               <TabsTrigger value="orderbook" className="mb-2">
-//                 📘 Orderbook
-//               </TabsTrigger>
-//               <TabsTrigger value="details">📊 Market Depth</TabsTrigger>
-//             </TabsList>
-//             {/* Tabs Content */}
-//             <div className="flex-1 bg-gray-800 p-6 rounded-md shadow ml-4">
-//               <TabsContent value="simulation">
-//                 <h2 className="text-xl font-semibold mb-4 text-indigo-400">
-//                   🧪 Simulate Order Placement
-//                 </h2>
-//                 <SimulationForm onSubmitSim={handleSubmit} />
-//               </TabsContent>
-//               <TabsContent value="orderbook">
-//                 <h2 className="text-xl font-semibold mb-4 text-green-400">
-//                   🧾 Live Orderbook ({symbol})
-//                 </h2>
-//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//                   <div>
-//                     <h3 className="text-lg text-green-300 mb-2">Bids</h3>
-//                     <div className="text-sm max-h-96 overflow-y-auto space-y-1">
-//                       {orderbook?.bids?.slice(0, 15).map((b, i) => (
-//                         <div key={i} className="text-green-200">
-//                           {b.price.toFixed(2)} × {b.quantity}
-//                         </div>
-//                       ))}
-//                     </div>
-//                   </div>
-//                   <div>
-//                     <h3 className="text-lg text-red-300 mb-2">Asks</h3>
-//                     <div className="text-sm max-h-96 overflow-y-auto space-y-1">
-//                       {orderbook?.asks?.slice(0, 15).map((a, i) => (
-//                         <div key={i} className="text-red-200">
-//                           {a.price.toFixed(2)} × {a.quantity}
-//                         </div>
-//                       ))}
-//                     </div>
-//                   </div>
-//                 </div>
-//               </TabsContent>
-//               <TabsContent value="details">
-//                 <h2 className="text-xl font-semibold mb-4 text-yellow-400">
-//                   📍 Market Depth & Simulation Details
-//                 </h2>
-//                 {simulatedOrder ? (
-//                   <OrderbookViewer
-//                     venue={simulatedOrder.venue}
-//                     symbol={simulatedOrder.symbol}
-//                     simulatedOrder={simulatedOrder}
-//                   />
-//                 ) : (
-//                   <div className="text-gray-400">
-//                     Submit an order simulation to view details.
-//                   </div>
-//                 )}
-//               </TabsContent>
-//             </div>
-//           </Tabs>
-//         </div>
-//       </div>
-//     </main>
-//   );
-// }
 __turbopack_context__.s({
     "default": ()=>DashboardPage
 });
@@ -2708,7 +2233,7 @@ function DashboardPage() {
                             children: "📊 Trading Dashboard"
                         }, void 0, false, {
                             fileName: "[project]/src/app/page.tsx",
-                            lineNumber: 582,
+                            lineNumber: 54,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2718,7 +2243,7 @@ function DashboardPage() {
                                     children: "Venue:"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 584,
+                                    lineNumber: 56,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2731,7 +2256,7 @@ function DashboardPage() {
                                             children: "OKX"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 592,
+                                            lineNumber: 64,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2739,7 +2264,7 @@ function DashboardPage() {
                                             children: "Bybit"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 593,
+                                            lineNumber: 65,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2747,25 +2272,25 @@ function DashboardPage() {
                                             children: "Deribit"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 594,
+                                            lineNumber: 66,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 585,
+                                    lineNumber: 57,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/page.tsx",
-                            lineNumber: 583,
+                            lineNumber: 55,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/page.tsx",
-                    lineNumber: 581,
+                    lineNumber: 53,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2779,20 +2304,20 @@ function DashboardPage() {
                                     children: "🧪 Simulate Order Placement"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 603,
+                                    lineNumber: 75,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SimulationForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                     onSubmitSim: handleSubmit
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 606,
+                                    lineNumber: 78,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/page.tsx",
-                            lineNumber: 602,
+                            lineNumber: 74,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2807,21 +2332,51 @@ function DashboardPage() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 611,
+                                    lineNumber: 83,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "grid grid-cols-2 gap-4 text-sm",
+                                    className: "grid grid-cols-2 gap-6 text-sm",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                    className: "text-green-300 mb-2",
+                                                    className: "text-green-400 font-semibold mb-2",
                                                     children: "Bids"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/page.tsx",
-                                                    lineNumber: 616,
-                                                    columnNumber: 17
+                                                    lineNumber: 121,
+                                                    columnNumber: 5
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "grid grid-cols-3 text-xs text-muted-foreground mb-1 px-1 font-medium",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            children: "Price"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/page.tsx",
+                                                            lineNumber: 123,
+                                                            columnNumber: 7
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            children: "Amount"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/page.tsx",
+                                                            lineNumber: 124,
+                                                            columnNumber: 7
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            children: "Total"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/page.tsx",
+                                                            lineNumber: 125,
+                                                            columnNumber: 7
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/app/page.tsx",
+                                                    lineNumber: 122,
+                                                    columnNumber: 5
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "space-y-1",
@@ -2829,56 +2384,86 @@ function DashboardPage() {
                                                         var _level_total;
                                                         var _level_total_toFixed;
                                                         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "grid grid-cols-3 text-xs text-green-400",
+                                                            className: "grid grid-cols-3 text-xs text-green-400 px-1",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                     children: level.price.toFixed(2)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/page.tsx",
-                                                                    lineNumber: 623,
-                                                                    columnNumber: 23
+                                                                    lineNumber: 133,
+                                                                    columnNumber: 11
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                     children: level.quantity.toFixed(3)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/page.tsx",
-                                                                    lineNumber: 624,
-                                                                    columnNumber: 23
+                                                                    lineNumber: 134,
+                                                                    columnNumber: 11
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                     children: (_level_total_toFixed = (_level_total = level.total) === null || _level_total === void 0 ? void 0 : _level_total.toFixed(3)) !== null && _level_total_toFixed !== void 0 ? _level_total_toFixed : '-'
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/page.tsx",
-                                                                    lineNumber: 625,
-                                                                    columnNumber: 23
+                                                                    lineNumber: 135,
+                                                                    columnNumber: 11
                                                                 }, this)
                                                             ]
                                                         }, i, true, {
                                                             fileName: "[project]/src/app/page.tsx",
-                                                            lineNumber: 619,
-                                                            columnNumber: 21
+                                                            lineNumber: 129,
+                                                            columnNumber: 9
                                                         }, this);
                                                     })
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/page.tsx",
-                                                    lineNumber: 617,
-                                                    columnNumber: 17
+                                                    lineNumber: 127,
+                                                    columnNumber: 5
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 615,
-                                            columnNumber: 15
+                                            lineNumber: 120,
+                                            columnNumber: 3
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                    className: "text-red-300 mb-2",
+                                                    className: "text-red-400 font-semibold mb-2",
                                                     children: "Asks"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/page.tsx",
-                                                    lineNumber: 631,
-                                                    columnNumber: 17
+                                                    lineNumber: 143,
+                                                    columnNumber: 5
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "grid grid-cols-3 text-xs text-muted-foreground mb-1 px-1 font-medium",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            children: "Price"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/page.tsx",
+                                                            lineNumber: 145,
+                                                            columnNumber: 7
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            children: "Amount"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/page.tsx",
+                                                            lineNumber: 146,
+                                                            columnNumber: 7
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            children: "Total"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/page.tsx",
+                                                            lineNumber: 147,
+                                                            columnNumber: 7
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/app/page.tsx",
+                                                    lineNumber: 144,
+                                                    columnNumber: 5
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "space-y-1",
@@ -2886,57 +2471,57 @@ function DashboardPage() {
                                                         var _level_total;
                                                         var _level_total_toFixed;
                                                         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "grid grid-cols-3 text-xs text-red-400",
+                                                            className: "grid grid-cols-3 text-xs text-red-400 px-1",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                     children: level.price.toFixed(2)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/page.tsx",
-                                                                    lineNumber: 638,
-                                                                    columnNumber: 23
+                                                                    lineNumber: 155,
+                                                                    columnNumber: 11
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                     children: level.quantity.toFixed(3)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/page.tsx",
-                                                                    lineNumber: 639,
-                                                                    columnNumber: 23
+                                                                    lineNumber: 156,
+                                                                    columnNumber: 11
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                     children: (_level_total_toFixed = (_level_total = level.total) === null || _level_total === void 0 ? void 0 : _level_total.toFixed(3)) !== null && _level_total_toFixed !== void 0 ? _level_total_toFixed : '-'
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/page.tsx",
-                                                                    lineNumber: 640,
-                                                                    columnNumber: 23
+                                                                    lineNumber: 157,
+                                                                    columnNumber: 11
                                                                 }, this)
                                                             ]
                                                         }, i, true, {
                                                             fileName: "[project]/src/app/page.tsx",
-                                                            lineNumber: 634,
-                                                            columnNumber: 21
+                                                            lineNumber: 151,
+                                                            columnNumber: 9
                                                         }, this);
                                                     })
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/page.tsx",
-                                                    lineNumber: 632,
-                                                    columnNumber: 17
+                                                    lineNumber: 149,
+                                                    columnNumber: 5
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/page.tsx",
-                                            lineNumber: 630,
-                                            columnNumber: 15
+                                            lineNumber: 142,
+                                            columnNumber: 3
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 614,
+                                    lineNumber: 118,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/page.tsx",
-                            lineNumber: 610,
+                            lineNumber: 82,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2947,7 +2532,7 @@ function DashboardPage() {
                                     children: "📊 Market Depth & Simulation Details"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 650,
+                                    lineNumber: 168,
                                     columnNumber: 13
                                 }, this),
                                 simulatedOrder ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$OrderbookViewer$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -2956,37 +2541,37 @@ function DashboardPage() {
                                     simulatedOrder: simulatedOrder
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 654,
+                                    lineNumber: 172,
                                     columnNumber: 15
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "text-gray-400",
                                     children: "Submit an order to view simulation results."
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/page.tsx",
-                                    lineNumber: 660,
+                                    lineNumber: 178,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/page.tsx",
-                            lineNumber: 649,
+                            lineNumber: 167,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/page.tsx",
-                    lineNumber: 600,
+                    lineNumber: 72,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/page.tsx",
-            lineNumber: 579,
+            lineNumber: 51,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/page.tsx",
-        lineNumber: 578,
+        lineNumber: 50,
         columnNumber: 5
     }, this);
 }
