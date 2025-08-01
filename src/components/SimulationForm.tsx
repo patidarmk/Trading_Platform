@@ -1,16 +1,24 @@
 'use client';
 
 import * as yup from 'yup';
-
 import { SubmitHandler, useForm } from 'react-hook-form';
-
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 
 export type Venue = 'OKX' | 'Bybit' | 'Deribit';
 export type OrderType = 'Market' | 'Limit';
 export type Side = 'Buy' | 'Sell';
 
-// ✅ Schema
 const schema = yup.object({
   venue: yup.string().oneOf(['OKX', 'Bybit', 'Deribit']).required(),
   symbol: yup.string().required('Symbol is required'),
@@ -44,6 +52,7 @@ export default function SimulationForm({
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<SimulationFormValues>({
     resolver: yupResolver(schema),
@@ -62,105 +71,107 @@ export default function SimulationForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmitSim)} className="grid gap-4 text-sm">
-      {/* Venue Selector */}
-      <div>
-        <label className="block mb-1 text-gray-300">Venue</label>
-        <select
-          {...register('venue')}
-          className="w-full bg-gray-900 border border-gray-700 px-3 py-2 rounded text-white"
+      {/* Venue */}
+      <div  className="grid gap-4 w-full max-w-md mx-auto text-sm">
+        <Label>Venue</Label>
+        <Select
+          value={watch('venue')}
+          onValueChange={(val) => setValue('venue', val as Venue)}
         >
-          <option value="OKX">OKX</option>
-          <option value="Bybit">Bybit</option>
-          <option value="Deribit">Deribit</option>
-        </select>
-        <p className="text-red-500 text-xs mt-1">{errors.venue?.message}</p>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select venue" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="OKX">OKX</SelectItem>
+            <SelectItem value="Bybit">Bybit</SelectItem>
+            <SelectItem value="Deribit">Deribit</SelectItem>
+          </SelectContent>
+        </Select>
+        <p className="text-xs text-red-500">{errors.venue?.message}</p>
       </div>
 
-      {/* Symbol Input */}
-      <div>
-        <label className="block mb-1 text-gray-300">Symbol</label>
-        <input
-          {...register('symbol')}
-          className="w-full bg-gray-900 border border-gray-700 px-3 py-2 rounded text-white"
-          placeholder="e.g. BTC-USDT"
-        />
-        <p className="text-red-500 text-xs mt-1">{errors.symbol?.message}</p>
+      {/* Symbol */}
+      <div className="grid gap-1.5">
+        <Label>Symbol</Label>
+        <Input placeholder="e.g. BTC-USDT" {...register('symbol')} />
+        <p className="text-xs text-red-500">{errors.symbol?.message}</p>
       </div>
 
       {/* Order Type */}
-      <div>
-        <label className="block mb-1 text-gray-300">Order Type</label>
-        <select
-          {...register('orderType')}
-          className="w-full bg-gray-900 border border-gray-700 px-3 py-2 rounded text-white"
+      <div className="grid gap-1.5">
+        <Label >Order Type</Label>
+        <Select
+          value={watch('orderType')}
+          onValueChange={(val) => setValue('orderType', val as OrderType)}
         >
-          <option value="Market">Market</option>
-          <option value="Limit">Limit</option>
-        </select>
-        <p className="text-red-500 text-xs mt-1">{errors.orderType?.message}</p>
+        <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select order type" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Market">Market</SelectItem>
+            <SelectItem value="Limit">Limit</SelectItem>
+          </SelectContent>
+        </Select>
+        <p className="text-xs text-red-500">{errors.orderType?.message}</p>
       </div>
 
       {/* Side */}
-      <div>
-        <label className="block mb-1 text-gray-300">Side</label>
-        <select
-          {...register('side')}
-          className="w-full bg-gray-900 border border-gray-700 px-3 py-2 rounded text-white"
+      <div className="grid gap-1.5">
+        <Label>Side</Label>
+        <Select
+          value={watch('side')}
+          onValueChange={(val) => setValue('side', val as Side)}
         >
-          <option value="Buy">Buy</option>
-          <option value="Sell">Sell</option>
-        </select>
-        <p className="text-red-500 text-xs mt-1">{errors.side?.message}</p>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select side" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Buy">Buy</SelectItem>
+            <SelectItem value="Sell">Sell</SelectItem>
+          </SelectContent>
+        </Select>
+        <p className="text-xs text-red-500">{errors.side?.message}</p>
       </div>
 
-      {/* Price (only for limit orders) */}
+      {/* Price */}
       {orderType === 'Limit' && (
-        <div>
-          <label className="block mb-1 text-gray-300">Price</label>
-          <input
-            type="number"
-            step="0.01"
-            {...register('price')}
-            className="w-full bg-gray-900 border border-gray-700 px-3 py-2 rounded text-white"
-          />
-          <p className="text-red-500 text-xs mt-1">{errors.price?.message}</p>
+        <div className="grid gap-1.5">
+          <Label>Price</Label>
+          <Input className="w-full"  type="number" step="0.01" {...register('price')} />
+          <p className="text-xs text-red-500">{errors.price?.message}</p>
         </div>
       )}
 
       {/* Quantity */}
-      <div>
-        <label className="block mb-1 text-gray-300">Quantity</label>
-        <input
-          type="number"
-          step="0.0001"
-          {...register('quantity')}
-          className="w-full bg-gray-900 border border-gray-700 px-3 py-2 rounded text-white"
-        />
-        <p className="text-red-500 text-xs mt-1">{errors.quantity?.message}</p>
+      <div className="grid gap-1.5">
+        <Label>Quantity</Label>
+        <Input className="w-full"  type="number" step="0.0001" {...register('quantity')} />
+        <p className="text-xs text-red-500">{errors.quantity?.message}</p>
       </div>
 
       {/* Delay */}
-      <div>
-        <label className="block mb-1 text-gray-300">Execution Delay</label>
-        <select
-          {...register('delay')}
-          className="w-full bg-gray-900 border border-gray-700 px-3 py-2 rounded text-white"
+      <div className="grid gap-1.5">
+        <Label>Execution Delay</Label>
+        <Select
+          value={String(watch('delay'))}
+          onValueChange={(val) => setValue('delay', Number(val))}
         >
-          <option value={0}>Immediate</option>
-          <option value={5}>5 seconds</option>
-          <option value={10}>10 seconds</option>
-          <option value={30}>30 seconds</option>
-        </select>
-        <p className="text-red-500 text-xs mt-1">{errors.delay?.message}</p>
+         <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select delay" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="0">Immediate</SelectItem>
+            <SelectItem value="5">5 seconds</SelectItem>
+            <SelectItem value="10">10 seconds</SelectItem>
+            <SelectItem value="30">30 seconds</SelectItem>
+          </SelectContent>
+        </Select>
+        <p className="text-xs text-red-500">{errors.delay?.message}</p>
       </div>
 
-      {/* Submit Button */}
-      <button
-        type="submit"
-        className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded w-full"
-      >
+      <Button type="submit" className="w-full mt-4">
         Simulate Order
-      </button>
+      </Button>
     </form>
   );
 }
